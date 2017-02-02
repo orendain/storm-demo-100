@@ -2,6 +2,7 @@ package hortonworks.tutorial
 
 import java.util
 
+import hortonworks.tutorial.models.{TrafficData, TruckAndTrafficData, TruckData}
 import org.apache.storm.task.{OutputCollector, TopologyContext}
 import org.apache.storm.topology.OutputFieldsDeclarer
 import org.apache.storm.topology.base.BaseWindowedBolt

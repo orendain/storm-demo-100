@@ -5,6 +5,7 @@ import java.nio.file.StandardOpenOption
 import java.util
 
 import better.files.File
+import hortonworks.tutorial.models.TruckAndTrafficData
 import org.apache.storm.task.{OutputCollector, TopologyContext}
 import org.apache.storm.topology.OutputFieldsDeclarer
 import org.apache.storm.topology.base.BaseRichBolt

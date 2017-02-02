@@ -2,7 +2,7 @@ package hortonworks.tutorial
 
 import org.apache.storm.topology.TopologyBuilder
 import org.apache.storm.topology.base.BaseWindowedBolt
-import org.apache.storm.{Config, LocalCluster, StormSubmitter}
+import org.apache.storm.{Config, StormSubmitter}
 
 import scala.concurrent.duration.SECONDS
 
