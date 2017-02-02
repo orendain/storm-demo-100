@@ -1,4 +1,4 @@
-package models
+package hortonworks.tutorial.models
 
 case class TruckData(eventTime: Long, truckId: Int, driverId: Int, driverName: String,
                      routeId: Int, routeName: String, latitude: Double, longitude: Double,

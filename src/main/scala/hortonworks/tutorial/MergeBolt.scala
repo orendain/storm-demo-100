@@ -1,6 +1,7 @@
+package hortonworks.tutorial
+
 import java.util
 
-import models.{TrafficData, TruckAndTrafficData, TruckData}
 import org.apache.storm.task.{OutputCollector, TopologyContext}
 import org.apache.storm.topology.OutputFieldsDeclarer
 import org.apache.storm.topology.base.BaseWindowedBolt
@@ -26,7 +27,7 @@ class MergeBolt extends BaseWindowedBolt {
 
     // Process each one of the tuples captured in the input window, separating data into bins according to routeId
     inputWindow.get().foreach { tuple =>
-      // Deserialize each tuple and convert it into its proper case class (e.g. models.TruckData or models.TrafficData
+      // Deserialize each tuple and convert it into its proper case class (e.g. hortonworks.tutorial.models.TruckData or hortonworks.tutorial.models.TrafficData
       tuple.getSourceComponent match {
         case "truckDataFromFile" =>
           val data = TruckData(tuple.getString(0))
@@ -47,7 +48,7 @@ class MergeBolt extends BaseWindowedBolt {
 
   private def processAndEmitData(truckDataPerRoute: Map[Int, ListBuffer[TruckData]],
                                  trafficDataPerRoute: Map[Int, ListBuffer[TrafficData]]) {
-    // For each models.TruckData object, find the models.TrafficData object with the closest timestamp
+    // For each hortonworks.tutorial.models.TruckData object, find the hortonworks.tutorial.models.TrafficData object with the closest timestamp
     truckDataPerRoute.foreach { case (routeId, truckDataList) =>
       trafficDataPerRoute.get(routeId) match {
         case None => // No traffic data for this routeId, so drop/ignore truck data

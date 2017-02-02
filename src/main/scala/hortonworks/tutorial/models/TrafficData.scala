@@ -1,4 +1,4 @@
-package models
+package hortonworks.tutorial.models
 
 case class TrafficData(eventTime: Long, routeId: Int, congestionLevel: Int)
 

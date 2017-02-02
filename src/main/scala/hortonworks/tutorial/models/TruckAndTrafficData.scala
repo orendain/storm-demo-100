@@ -1,4 +1,4 @@
-package models
+package hortonworks.tutorial.models
 
 /**
   * @author Edgar Orendain <edgar@orendainx.com>

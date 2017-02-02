@@ -1,3 +1,5 @@
+package hortonworks.tutorial
+
 import java.io.BufferedReader
 import java.util
 

@@ -1,10 +1,15 @@
+package hortonworks.tutorial
+
 import org.apache.storm.topology.TopologyBuilder
 import org.apache.storm.topology.base.BaseWindowedBolt
-import org.apache.storm.{Config, LocalCluster}
+import org.apache.storm.{Config, LocalCluster, StormSubmitter}
 
 import scala.concurrent.duration.SECONDS
 
-object DemoTruckTopology {
+/**
+  * @author Edgar Orendain <edgar@orendainx.com>
+  */
+object TruckingTopology100 {
 
   def main(args: Array[String]): Unit = {
 
@@ -21,10 +26,9 @@ object DemoTruckTopology {
     stormConfig.setNumWorkers(1)
     stormConfig.setMaxTaskParallelism(1)
 
-    val cluster = new LocalCluster()
-
-    cluster.submitTopology("truckingTopology", stormConfig, builder.createTopology())
-    //StormSubmitter.submitTopologyWithProgressBar("truckingTopology", stormConfig, builder.createTopology())
+    //val localCluster = new LocalCluster()
+    //localCluster.submitTopology("truckingTopology100", stormConfig, builder.createTopology())
+    StormSubmitter.submitTopologyWithProgressBar("truckingTopology100", stormConfig, builder.createTopology())
   }
 
 }
