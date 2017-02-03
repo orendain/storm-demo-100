@@ -12,7 +12,11 @@ import org.apache.storm.tuple.{Fields, Values}
 
 class FileReaderSpout(filePath: String) extends BaseRichSpout {
 
+  // An instance of a reader so that we can read pull data in from a file.
   private var fileReader: BufferedReader = _
+
+  // The OutputCollector allows this bolt to emit Tuples at anytime.  Once the instance of this collector is saved
+  // inside the open() method, we can emit Tuples from within nextTuple(), close(), or even asynchronous threads.
   private var outputCollector: SpoutOutputCollector = _
 
   /**
@@ -34,7 +38,7 @@ class FileReaderSpout(filePath: String) extends BaseRichSpout {
   override def nextTuple() {
     val line = fileReader.readLine()
     outputCollector.emit(new Values(line))
-    //Thread sleep 1000
+    //Thread sleep 1
   }
 
   /**

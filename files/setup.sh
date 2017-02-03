@@ -1,10 +1,10 @@
 #!/bin/bash
 
 PROJ_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-DEST_DIR=/tmp/tutorial/storm
+DEST_DIR=/tmp/storm-tutorial
 
 # Move input files to accessible location
-mkdir -p $DEST_DIR
+mkdir -p -m 777 $DEST_DIR
 cp $PROJ_DIR/src/main/resources/truck-input.txt $DEST_DIR
 cp $PROJ_DIR/src/main/resources/traffic-input.txt $DEST_DIR
 
