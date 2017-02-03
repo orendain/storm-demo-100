@@ -17,7 +17,7 @@ class FileWriterBolt extends BaseRichBolt {
   private var outputCollector: OutputCollector = _
 
   override def prepare(stormConf: util.Map[_, _], context: TopologyContext, collector: OutputCollector) {
-    fileWriter = File("/tmp/storm-tutorial-merged-data.txt").newPrintWriter(autoFlush = true)(Seq(StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE))
+    fileWriter = File("/tmp/tutorial/storm/merged-output.txt").newPrintWriter(autoFlush = true)(Seq(StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE))
     outputCollector = collector
   }
 

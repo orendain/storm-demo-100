@@ -10,7 +10,7 @@ import org.apache.storm.topology.OutputFieldsDeclarer
 import org.apache.storm.topology.base.BaseRichSpout
 import org.apache.storm.tuple.{Fields, Values}
 
-class FileReaderSpout(fileName: String) extends BaseRichSpout {
+class FileReaderSpout(filePath: String) extends BaseRichSpout {
 
   private var fileReader: BufferedReader = _
   private var outputCollector: SpoutOutputCollector = _
@@ -24,7 +24,7 @@ class FileReaderSpout(fileName: String) extends BaseRichSpout {
     * @param collector The collector is thread-safe and is used to emit tuples from this spout. Tuples can be emitted at any time in any method.
     */
   override def open(conf: util.Map[_, _], context: TopologyContext, collector: SpoutOutputCollector) {
-    fileReader = File(getClass.getResource(fileName).getPath).newBufferedReader
+    fileReader = File(filePath).newBufferedReader
     outputCollector = collector
   }
 
