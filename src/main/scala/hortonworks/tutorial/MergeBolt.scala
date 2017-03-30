@@ -50,11 +50,11 @@ class MergeBolt extends BaseWindowedBolt {
       tuple.getSourceComponent match {
 
         case "truckDataFromFile" =>
-          val data = TruckData(tuple.getString(0))
+          val data = TruckData(tuple.getStringByField("data"))
           truckDataPerRoute += (data.routeId -> (truckDataPerRoute.getOrElse(data.routeId, ListBuffer.empty[TruckData]) += data))
 
         case "trafficDataFromFile" =>
-          val data = TrafficData(tuple.getString(0))
+          val data = TrafficData(tuple.getStringByField("data"))
           trafficDataPerRoute += (data.routeId -> (trafficDataPerRoute.getOrElse(data.routeId, ListBuffer.empty[TrafficData]) += data))
       }
 
@@ -74,7 +74,7 @@ class MergeBolt extends BaseWindowedBolt {
     * Here, we are emitting tuples of a single field.  We're nicknaming this field "mergedData".
     */
   override def declareOutputFields(declarer: OutputFieldsDeclarer): Unit = {
-    declarer.declare(new Fields("mergedData"))
+    declarer.declare(new Fields("data"))
   }
 
   /**

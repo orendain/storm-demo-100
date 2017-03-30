@@ -29,7 +29,7 @@ object TruckingTopology100 {
       .shuffleGrouping("trafficDataFromFile")
 
     // Finally, create a FileWriterBolt, which reads data from the MergeBolt above, and add it to the builder.
-    builder.setBolt("mergedDataToFile", new FileWriterBolt()).shuffleGrouping("windowedMergeBolt")
+    builder.setBolt("mergedDataToFile", new FileWriterBolt("/tmp/tutorial/storm/merged-output.txt")).shuffleGrouping("windowedMergeBolt")
 
     // Storm provides a Config class which makes it easy to set configuration options for a topology.
     // To keep things simple, we create one worker and set parallelism to one
@@ -43,7 +43,7 @@ object TruckingTopology100 {
     // We give the topology the name of "truckingTopology100"
     // stormConfig tells Storm the configurations we want to use
     // builder.createTopology() creates a blueprint of our topology to feed to Storm
-    StormSubmitter.submitTopologyWithProgressBar("truckingTopology100", stormConfig, builder.createTopology())
+    StormSubmitter.submitTopologyWithProgressBar("TruckingTopology100", stormConfig, builder.createTopology())
 
 
     // The following is used for local mode. Can ignore.

@@ -11,7 +11,7 @@ import org.apache.storm.topology.OutputFieldsDeclarer
 import org.apache.storm.topology.base.BaseRichBolt
 import org.apache.storm.tuple.Tuple
 
-class FileWriterBolt extends BaseRichBolt {
+class FileWriterBolt(filePath: String) extends BaseRichBolt {
 
   // An instance of a writer so that we can write data to a file.
   private var fileWriter: PrintWriter = _
@@ -29,7 +29,7 @@ class FileWriterBolt extends BaseRichBolt {
     * @param collector The collector is thread-safe and is used to emit tuples from this spout. Tuples can be emitted at any time in any method.
     */
   override def prepare(stormConf: util.Map[_, _], context: TopologyContext, collector: OutputCollector) {
-    fileWriter = File("/tmp/tutorial/storm/merged-output.txt").newPrintWriter(autoFlush = true)(Seq(StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE))
+    fileWriter = File(filePath).newPrintWriter(autoFlush = true)(Seq(StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE))
     outputCollector = collector
   }
 
@@ -39,7 +39,7 @@ class FileWriterBolt extends BaseRichBolt {
     * @param input The tuple for this bolt to process.
     */
   override def execute(input: Tuple) {
-    fileWriter.println(input.getValue(0).asInstanceOf[TruckAndTrafficData].toCSV)
+    fileWriter.println(input.getValueByField("data").asInstanceOf[TruckAndTrafficData].toCSV)
     outputCollector.ack(input)
   }
 
