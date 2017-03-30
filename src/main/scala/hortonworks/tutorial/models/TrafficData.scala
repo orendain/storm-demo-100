@@ -1,5 +1,8 @@
 package hortonworks.tutorial.models
 
+/**
+  * @author Edgar Orendain <edgar@orendainx.com>
+  */
 case class TrafficData(eventTime: Long, routeId: Int, congestionLevel: Int)
 
 object TrafficData {

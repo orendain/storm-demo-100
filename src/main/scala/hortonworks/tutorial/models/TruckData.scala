@@ -1,5 +1,8 @@
 package hortonworks.tutorial.models
 
+/**
+  * @author Edgar Orendain <edgar@orendainx.com>
+  */
 case class TruckData(eventTime: Long, truckId: Int, driverId: Int, driverName: String,
                      routeId: Int, routeName: String, latitude: Double, longitude: Double,
                      speed: Int, eventType: String)
