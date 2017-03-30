@@ -9,7 +9,7 @@ import org.apache.storm.topology.base.BaseWindowedBolt
 import org.apache.storm.tuple.{Fields, Values}
 import org.apache.storm.windowing.TupleWindow
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import scala.collection.mutable.ListBuffer
 import scala.collection.{Map, mutable}
 
@@ -42,7 +42,7 @@ class MergeBolt extends BaseWindowedBolt {
     val trafficDataPerRoute = mutable.HashMap.empty[Int, ListBuffer[TrafficData]]
 
     // Process each one of the tuples captured in the input window, separating data into bins according to routeId
-    inputWindow.get().foreach { tuple =>
+    inputWindow.get().asScala.foreach { tuple =>
 
       // Deserialize each tuple and convert it into its proper case class
       // (e.g. hortonworks.tutorial.models.TruckData or hortonworks.tutorial.models.TrafficData)
