@@ -36,9 +36,10 @@ class FileReaderSpout(filePath: String) extends BaseRichSpout {
     * Storm will call this method repeatedly to pull tuples from the spout
     */
   override def nextTuple() {
-    val line = fileReader.readLine()
-    outputCollector.emit(new Values(line))
-    //Thread sleep 1
+    val line = Option(fileReader.readLine())
+
+    if (line.isDefined) outputCollector.emit(new Values(line.get))
+    else Thread sleep 1
   }
 
   /**

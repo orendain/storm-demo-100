@@ -76,7 +76,7 @@ class MergeBolt extends BaseWindowedBolt {
   /**
     * Tell storm which fields are emitted by the spout.
     *
-    * Here, we are emitting tuples of a single field.  We're nicknaming this field "mergedData".
+    * Here, we are emitting tuples of a single field.  We're nicknaming this field "data".
     */
   override def declareOutputFields(declarer: OutputFieldsDeclarer): Unit = {
     declarer.declare(new Fields("data"))
