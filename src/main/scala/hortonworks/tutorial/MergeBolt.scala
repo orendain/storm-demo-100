@@ -2,6 +2,7 @@ package hortonworks.tutorial
 
 import java.util
 
+import com.typesafe.scalalogging.Logger
 import hortonworks.tutorial.models.{TrafficData, TruckAndTrafficData, TruckData}
 import org.apache.storm.task.{OutputCollector, TopologyContext}
 import org.apache.storm.topology.OutputFieldsDeclarer
@@ -14,6 +15,8 @@ import scala.collection.mutable.ListBuffer
 import scala.collection.{Map, mutable}
 
 class MergeBolt extends BaseWindowedBolt {
+
+  private lazy val log = Logger(this.getClass)
 
   // The OutputCollector allows this bolt to emit Tuples at anytime.  Once the instance of this collector is saved
   // inside the prepare() method, we can emit Tuples from within execute(), cleanup(), or even asynchronous threads.
@@ -43,6 +46,8 @@ class MergeBolt extends BaseWindowedBolt {
 
     // Process each one of the tuples captured in the input window, separating data into bins according to routeId
     inputWindow.get().asScala.foreach { tuple =>
+
+      log.info(s"Exec: ${tuple.getSourceComponent} ${tuple.getStringByField("data")}")
 
       // Deserialize each tuple and convert it into its proper case class
       // (e.g. hortonworks.tutorial.models.TruckData or hortonworks.tutorial.models.TrafficData)
